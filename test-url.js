@@ -515,7 +515,6 @@ var parseTests = {
 
   'http://bucket_name.s3.amazonaws.com/image.jpg': {
     protocol: 'http:',
-    'slashes': true,
     slashes: true,
     host: 'bucket_name.s3.amazonaws.com',
     hostname: 'bucket_name.s3.amazonaws.com',
@@ -1166,7 +1165,7 @@ var relativeTests2 = [
   ['g?y#s', bases[0], 'http://a/b/c/g?y#s'],
   [';x', bases[0], 'http://a/b/c/;x'],
   ['g;x', bases[0], 'http://a/b/c/g;x'],
-  ['g;x?y#s' , bases[0], 'http://a/b/c/g;x?y#s'],
+  ['g;x?y#s', bases[0], 'http://a/b/c/g;x?y#s'],
   // changed with RFC 2396bis
   //('', bases[0], CURRENT_DOC_URI],
   ['', bases[0], 'http://a/b/c/d;p?q'],
@@ -1177,7 +1176,7 @@ var relativeTests2 = [
   ['../g', bases[0], 'http://a/b/g'],
   ['../..', bases[0], 'http://a/'],
   ['../../', bases[0], 'http://a/'],
-  ['../../g' , bases[0], 'http://a/g'],
+  ['../../g', bases[0], 'http://a/g'],
   ['../../../g', bases[0], ('http://a/../g', 'http://a/g')],
   ['../../../../g', bases[0], ('http://a/../../g', 'http://a/g')],
   // changed with RFC 2396bis
@@ -1216,16 +1215,16 @@ var relativeTests2 = [
   //('?y', bases[1], 'http://a/b/c/?y'],
   ['?y', bases[1], 'http://a/b/c/d;p?y'],
   ['g?y', bases[1], 'http://a/b/c/g?y'],
-  ['g?y/./x' , bases[1], 'http://a/b/c/g?y/./x'],
+  ['g?y/./x', bases[1], 'http://a/b/c/g?y/./x'],
   ['g?y/../x', bases[1], 'http://a/b/c/g?y/../x'],
   ['g#s', bases[1], 'http://a/b/c/g#s'],
-  ['g#s/./x' , bases[1], 'http://a/b/c/g#s/./x'],
+  ['g#s/./x', bases[1], 'http://a/b/c/g#s/./x'],
   ['g#s/../x', bases[1], 'http://a/b/c/g#s/../x'],
   ['./', bases[1], 'http://a/b/c/'],
   ['../', bases[1], 'http://a/b/'],
   ['../g', bases[1], 'http://a/b/g'],
   ['../../', bases[1], 'http://a/'],
-  ['../../g' , bases[1], 'http://a/g'],
+  ['../../g', bases[1], 'http://a/g'],
 
   // http://gbiv.com/protocols/uri/test/rel_examples3.html
   // slashes in path params
@@ -1242,7 +1241,7 @@ var relativeTests2 = [
   ['../', bases[2], 'http://a/b/c/'],
   ['../g', bases[2], 'http://a/b/c/g'],
   ['../../', bases[2], 'http://a/b/'],
-  ['../../g' , bases[2], 'http://a/b/g'],
+  ['../../g', bases[2], 'http://a/b/g'],
 
   // http://gbiv.com/protocols/uri/test/rel_examples4.html
   // double and triple slash, unknown scheme
@@ -1259,7 +1258,7 @@ var relativeTests2 = [
   ['../g', bases[3], 'fred:///s//a/g'],
 
   ['../../', bases[3], 'fred:///s//'],
-  ['../../g' , bases[3], 'fred:///s//g'],
+  ['../../g', bases[3], 'fred:///s//g'],
   ['../../../g', bases[3], 'fred:///s/g'],
   // may change to fred:///s//a/../../../g
   ['../../../../g', bases[3], 'fred:///g'],
@@ -1278,7 +1277,7 @@ var relativeTests2 = [
   ['../', bases[4], 'http:///s//a/'],
   ['../g', bases[4], 'http:///s//a/g'],
   ['../../', bases[4], 'http:///s//'],
-  ['../../g' , bases[4], 'http:///s//g'],
+  ['../../g', bases[4], 'http:///s//g'],
   // may change to http:///s//a/../../g
   ['../../../g', bases[4], 'http:///s/g'],
   // may change to http:///s//a/../../../g
