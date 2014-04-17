@@ -10,7 +10,7 @@
     "browserify": "^3.43.0"
   },
   "scripts": {
-    "test": "node test-url.js"
+    "test": "node test.js"
   },
   "testling": {
     "files": "test-url.js",
