@@ -18,7 +18,7 @@
       "ie/8..latest",
       "firefox/24..latest",
       "firefox/nightly",
-      "chrome/30..latest",
+      "chrome/latest",
       "chrome/canary",
       "opera/12..latest",
       "opera/next",
