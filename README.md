@@ -8,6 +8,8 @@ This module has utilities for URL resolution and parsing meant to have feature p
 var url = require('url');
 ```
 
+## api
+
 Parsed URL objects have some or all of the following fields, depending on
 whether or not they exist in the URL string. Any parts that are not in the URL
 string will not be in the parsed object. Examples are shown for the URL
@@ -64,7 +66,7 @@ string will not be in the parsed object. Examples are shown for the URL
 
 The following methods are provided by the URL module:
 
-## url.parse(urlStr, [parseQueryString], [slashesDenoteHost])
+### url.parse(urlStr, [parseQueryString], [slashesDenoteHost])
 
 Take a URL string, and return an object.
 
@@ -76,7 +78,7 @@ Pass `true` as the third argument to treat `//foo/bar` as
 `{ host: 'foo', pathname: '/bar' }` rather than
 `{ pathname: '//foo/bar' }`. Defaults to `false`.
 
-## url.format(urlObj)
+### url.format(urlObj)
 
 Take a parsed URL object, and return a formatted URL string.
 
@@ -96,7 +98,7 @@ Take a parsed URL object, and return a formatted URL string.
 * `search` is treated the same with or without the leading `?` (question mark)
 * `hash` is treated the same with or without the leading `#` (pound sign, anchor)
 
-## url.resolve(from, to)
+### url.resolve(from, to)
 
 Take a base URL, and a href URL, and resolve them as a browser would for
 an anchor tag.  Examples:
