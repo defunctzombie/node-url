@@ -6,6 +6,26 @@
     "punycode": "^1.2.4"
   },
   "devDependencies": {
-    "assert": "^1.1.1"
+    "assert": "^1.1.1",
+    "browserify": "^3.43.0"
+  },
+  "scripts": {
+    "test": "node test-url.js"
+  },
+  "testling": {
+    "files": "test-url.js",
+    "browsers": [
+      "ie/8..latest",
+      "firefox/24..latest",
+      "firefox/nightly",
+      "chrome/30..latest",
+      "chrome/canary",
+      "opera/12..latest",
+      "opera/next",
+      "safari/5.1..latest",
+      "ipad/6.0..latest",
+      "iphone/6.0..latest",
+      "android-browser/4.2..latest"
+    ]
   }
 }

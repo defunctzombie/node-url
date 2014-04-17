@@ -1455,3 +1455,11 @@ relativeTests2.forEach(function(relativeTest) {
                'format(' + relativeTest[1] + ') == ' + expected +
                '\nactual:' + actual);
 });
+
+// wannabe TAP
+// simulate for now, if the script gets this far, everything has passed
+console.log("1..1");
+console.log("ok 1 everything passed");
+console.log("# tests 1");
+console.log("# pass 1");
+console.log("# fail 0");
