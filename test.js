@@ -20,9 +20,11 @@
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 var assert = require('assert');
+var util = require('util');
 
-var url = require('./url'),
-    util = require('util');
+var url = require('./url');
+
+test('god', function() {
 
 // URLs to parse, and expected data
 // { url : parsed }
@@ -1456,10 +1458,4 @@ relativeTests2.forEach(function(relativeTest) {
                '\nactual:' + actual);
 });
 
-// wannabe TAP
-// simulate for now, if the script gets this far, everything has passed
-console.log("1..1");
-console.log("ok 1 everything passed");
-console.log("# tests 1");
-console.log("# pass 1");
-console.log("# fail 0");
+});

@@ -7,10 +7,10 @@
   },
   "devDependencies": {
     "assert": "^1.1.1",
-    "browserify": "^3.43.0"
+    "mocha": "1.18.2"
   },
   "scripts": {
-    "test": "node test.js"
+    "test": "mocha --ui qunit test.js"
   },
   "testling": {
     "files": "test-url.js",
