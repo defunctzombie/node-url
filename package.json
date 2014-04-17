@@ -7,25 +7,11 @@
   },
   "devDependencies": {
     "assert": "1.1.1",
-    "mocha": "1.18.2"
+    "mocha": "1.18.2",
+    "zuul": "1.6.3"
   },
   "scripts": {
-    "test": "mocha --ui qunit test.js"
-  },
-  "testling": {
-    "files": "test-url.js",
-    "browsers": [
-      "ie/8..latest",
-      "firefox/24..latest",
-      "firefox/nightly",
-      "chrome/latest",
-      "chrome/canary",
-      "opera/12..latest",
-      "opera/next",
-      "safari/5.1..latest",
-      "ipad/6.0..latest",
-      "iphone/6.0..latest",
-      "android-browser/4.2..latest"
-    ]
+    "test": "mocha --ui qunit test.js && zuul -- test.js",
+    "test-local": "zuul --local -- test.js"
   }
 }
