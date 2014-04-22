@@ -20,6 +20,7 @@
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 var punycode = require('punycode');
+var objectKeys = Object.keys || require('object-keys');
 
 exports.parse = urlParse;
 exports.resolve = urlResolve;
@@ -110,7 +111,7 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
 
   // trim before proceeding.
   // This is to support parse stuff like "  http://foo.com  \n"
-  rest = rest.trim();
+  rest = String(rest).replace(/^\s+/,'').replace(/\s+$/,'');
 
   var proto = protocolPattern.exec(rest);
   if (proto) {
@@ -372,7 +373,7 @@ Url.prototype.format = function() {
 
   if (this.query &&
       isObject(this.query) &&
-      Object.keys(this.query).length) {
+      objectKeys(this.query).length) {
     query = querystring.stringify(this.query);
   }
 
@@ -422,9 +423,11 @@ Url.prototype.resolveObject = function(relative) {
   }
 
   var result = new Url();
-  Object.keys(this).forEach(function(k) {
+  var keys = objectKeys(this);
+  for (var i = 0; i < keys.length; i++) {
+    var k = keys[i];
     result[k] = this[k];
-  }, this);
+  }
 
   // hash is always overridden, no matter what.
   // even href="" will remove it.
@@ -439,7 +442,7 @@ Url.prototype.resolveObject = function(relative) {
   // hrefs like //foo/bar always cut to the protocol.
   if (relative.slashes && !relative.protocol) {
     // take everything except the protocol from relative
-    Object.keys(relative).forEach(function(k) {
+    objectKeys(relative).forEach(function(k) {
       if (k !== 'protocol')
         result[k] = relative[k];
     });
@@ -464,9 +467,11 @@ Url.prototype.resolveObject = function(relative) {
     // because that's known to be hostless.
     // anything else is assumed to be absolute.
     if (!slashedProtocol[relative.protocol]) {
-      Object.keys(relative).forEach(function(k) {
+      var keys = objectKeys(relative)
+      for (var i = 0; i < keys.length; i++) {
+        var k = keys[i];
         result[k] = relative[k];
-      });
+      }
       result.href = result.format();
       return result;
     }

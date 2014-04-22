@@ -3,6 +3,7 @@
   "description": "The core `url` packaged standalone for use with Browserify.",
   "version": "0.10.1",
   "dependencies": {
+    "object-keys": "^0.5.1",
     "punycode": "1.2.4"
   },
   "main": "./url.js",
