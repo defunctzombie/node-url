@@ -1,7 +1,7 @@
 {
   "name": "url",
   "description": "The core `url` packaged standalone for use with Browserify.",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "dependencies": {
     "punycode": "1.2.4"
   },
