@@ -379,7 +379,7 @@ Url.prototype.format = function() {
 
   var search = this.search || (query && ('?' + query)) || '';
 
-  if (protocol && protocol.substr(-1) !== ':') protocol += ':';
+  if (protocol && substr(protocol,-1) !== ':') protocol += ':';
 
   // only the slashedProtocols get the //.  Not mailto:, xmpp:, etc.
   // unless they had them to begin with.
@@ -637,7 +637,7 @@ Url.prototype.resolveObject = function(relative) {
     srcPath.unshift('');
   }
 
-  if (hasTrailingSlash && (srcPath.join('/').substr(-1) !== '/')) {
+  if (hasTrailingSlash && substr(srcPath.join('/'),-1) !== '/') {
     srcPath.push('');
   }
 
@@ -709,4 +709,8 @@ function isNull(arg) {
 }
 function isNullOrUndefined(arg) {
   return  arg == null;
+}
+
+function substr (s, i) {
+  return i >= 0 ? s.substr(i) : s.substr(s.length + i);
 }
