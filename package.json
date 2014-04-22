@@ -9,6 +9,7 @@
   "main": "./url.js",
   "devDependencies": {
     "assert": "1.1.1",
+    "foreach": "2.0.4",
     "mocha": "1.18.2",
     "zuul": "1.6.3"
   },
