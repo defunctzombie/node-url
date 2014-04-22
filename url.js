@@ -20,6 +20,8 @@
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 var punycode = require('punycode');
+var objectKeys = Object.keys || require('object-keys');
+var indexOf = require('indexof');
 
 exports.parse = urlParse;
 exports.resolve = urlResolve;
@@ -110,7 +112,7 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
 
   // trim before proceeding.
   // This is to support parse stuff like "  http://foo.com  \n"
-  rest = rest.trim();
+  rest = String(rest).replace(/^\s+/,'').replace(/\s+$/,'');
 
   var proto = protocolPattern.exec(rest);
   if (proto) {
@@ -153,7 +155,7 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
     // find the first instance of any hostEndingChars
     var hostEnd = -1;
     for (var i = 0; i < hostEndingChars.length; i++) {
-      var hec = rest.indexOf(hostEndingChars[i]);
+      var hec = indexOf(rest, hostEndingChars[i]);
       if (hec !== -1 && (hostEnd === -1 || hec < hostEnd))
         hostEnd = hec;
     }
@@ -181,7 +183,7 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
     // the host is the remaining to the left of the first non-host char
     hostEnd = -1;
     for (var i = 0; i < nonHostChars.length; i++) {
-      var hec = rest.indexOf(nonHostChars[i]);
+      var hec = indexOf(rest, nonHostChars[i]);
       if (hec !== -1 && (hostEnd === -1 || hec < hostEnd))
         hostEnd = hec;
     }
@@ -297,13 +299,13 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
 
 
   // chop off from the tail first.
-  var hash = rest.indexOf('#');
+  var hash = indexOf(rest, '#');
   if (hash !== -1) {
     // got a fragment string.
     this.hash = rest.substr(hash);
     rest = rest.slice(0, hash);
   }
-  var qm = rest.indexOf('?');
+  var qm = indexOf(rest, '?');
   if (qm !== -1) {
     this.search = rest.substr(qm);
     this.query = rest.substr(qm + 1);
@@ -362,7 +364,7 @@ Url.prototype.format = function() {
   if (this.host) {
     host = auth + this.host;
   } else if (this.hostname) {
-    host = auth + (this.hostname.indexOf(':') === -1 ?
+    host = auth + (indexOf(this.hostname, ':') === -1 ?
         this.hostname :
         '[' + this.hostname + ']');
     if (this.port) {
@@ -372,13 +374,13 @@ Url.prototype.format = function() {
 
   if (this.query &&
       isObject(this.query) &&
-      Object.keys(this.query).length) {
+      objectKeys(this.query).length) {
     query = querystring.stringify(this.query);
   }
 
   var search = this.search || (query && ('?' + query)) || '';
 
-  if (protocol && protocol.substr(-1) !== ':') protocol += ':';
+  if (protocol && substr(protocol,-1) !== ':') protocol += ':';
 
   // only the slashedProtocols get the //.  Not mailto:, xmpp:, etc.
   // unless they had them to begin with.
@@ -422,9 +424,11 @@ Url.prototype.resolveObject = function(relative) {
   }
 
   var result = new Url();
-  Object.keys(this).forEach(function(k) {
+  var keys = objectKeys(this);
+  for (var i = 0; i < keys.length; i++) {
+    var k = keys[i];
     result[k] = this[k];
-  }, this);
+  }
 
   // hash is always overridden, no matter what.
   // even href="" will remove it.
@@ -439,7 +443,7 @@ Url.prototype.resolveObject = function(relative) {
   // hrefs like //foo/bar always cut to the protocol.
   if (relative.slashes && !relative.protocol) {
     // take everything except the protocol from relative
-    Object.keys(relative).forEach(function(k) {
+    objectKeys(relative).forEach(function(k) {
       if (k !== 'protocol')
         result[k] = relative[k];
     });
@@ -464,9 +468,11 @@ Url.prototype.resolveObject = function(relative) {
     // because that's known to be hostless.
     // anything else is assumed to be absolute.
     if (!slashedProtocol[relative.protocol]) {
-      Object.keys(relative).forEach(function(k) {
+      var keys = objectKeys(relative)
+      for (var i = 0; i < keys.length; i++) {
+        var k = keys[i];
         result[k] = relative[k];
-      });
+      }
       result.href = result.format();
       return result;
     }
@@ -564,7 +570,7 @@ Url.prototype.resolveObject = function(relative) {
       //occationaly the auth can get stuck only in host
       //this especialy happens in cases like
       //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
-      var authInHost = result.host && result.host.indexOf('@') > 0 ?
+      var authInHost = result.host && indexOf(result.host, '@') > 0 ?
                        result.host.split('@') : false;
       if (authInHost) {
         result.auth = authInHost.shift();
@@ -632,7 +638,7 @@ Url.prototype.resolveObject = function(relative) {
     srcPath.unshift('');
   }
 
-  if (hasTrailingSlash && (srcPath.join('/').substr(-1) !== '/')) {
+  if (hasTrailingSlash && substr(srcPath.join('/'),-1) !== '/') {
     srcPath.push('');
   }
 
@@ -646,7 +652,7 @@ Url.prototype.resolveObject = function(relative) {
     //occationaly the auth can get stuck only in host
     //this especialy happens in cases like
     //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
-    var authInHost = result.host && result.host.indexOf('@') > 0 ?
+    var authInHost = result.host && indexOf(result.host, '@') > 0 ?
                      result.host.split('@') : false;
     if (authInHost) {
       result.auth = authInHost.shift();
@@ -704,4 +710,8 @@ function isNull(arg) {
 }
 function isNullOrUndefined(arg) {
   return  arg == null;
+}
+
+function substr (s, i) {
+  return i >= 0 ? s.substr(i) : s.substr(s.length + i);
 }

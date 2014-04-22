@@ -20,7 +20,8 @@
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 var assert = require('assert');
-var util = require('util');
+var objectKeys = require('object-keys');
+var forEach = require('foreach');
 
 var url = require('./url');
 
@@ -797,11 +798,13 @@ for (var u in parseTests) {
       spaced = url.parse('     \t  ' + u + '\n\t');
       expected = parseTests[u];
 
-  Object.keys(actual).forEach(function (i) {
-    if (expected[i] === undefined && actual[i] === null) {
-      expected[i] = null;
+  var keys = objectKeys(actual);
+  for (var i = 0; i < keys.length; i++) {
+    var k = keys[i];
+    if (expected[k] === undefined && actual[k] === null) {
+      expected[k] = null;
     }
-  });
+  }
 
   assert.deepEqual(actual, expected);
   assert.deepEqual(spaced, expected);
@@ -1091,7 +1094,7 @@ var relativeTests = [
    'http://example.com/a/b/c/d'],
   ['/foo/bar/baz', '/../etc/passwd', '/etc/passwd']
 ];
-relativeTests.forEach(function(relativeTest) {
+forEach(relativeTests, function(relativeTest) {
   var a = url.resolve(relativeTest[0], relativeTest[1]),
       e = relativeTest[2];
   assert.equal(a, e,
@@ -1101,7 +1104,7 @@ relativeTests.forEach(function(relativeTest) {
 
 
 // https://github.com/joyent/node/issues/568
-[
+forEach([
   undefined,
   null,
   true,
@@ -1110,7 +1113,7 @@ relativeTests.forEach(function(relativeTest) {
   0,
   [],
   {}
-].forEach(function(val) {
+], function(val) {
   assert.throws(function() { url.parse(val); }, TypeError);
 });
 
@@ -1401,7 +1404,7 @@ var relativeTests2 = [
    'http://asdf:qwer@www.example.com',
    'http://diff:auth@www.example.com/']
 ];
-relativeTests2.forEach(function(relativeTest) {
+forEach(relativeTests2, function(relativeTest) {
   var a = url.resolve(relativeTest[1], relativeTest[0]),
       e = relativeTest[2];
   assert.equal(a, e,
@@ -1416,7 +1419,7 @@ relativeTests2.forEach(function(relativeTest) {
 var emptyIsImportant = {'host': true, 'hostname': ''};
 
 //format: [from, path, expected]
-relativeTests.forEach(function(relativeTest) {
+forEach(relativeTests, function(relativeTest) {
   var actual = url.resolveObject(url.parse(relativeTest[0]), relativeTest[1]),
       expected = url.parse(relativeTest[2]);
 
@@ -1444,7 +1447,7 @@ if (relativeTests2[181][0] === './/g' &&
     relativeTests2[181][2] === 'f://g') {
   relativeTests2.splice(181, 1);
 }
-relativeTests2.forEach(function(relativeTest) {
+forEach(relativeTests2, function(relativeTest) {
   var actual = url.resolveObject(url.parse(relativeTest[1]), relativeTest[0]),
       expected = url.parse(relativeTest[2]);
 
