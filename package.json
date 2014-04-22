@@ -5,6 +5,7 @@
   "dependencies": {
     "punycode": "1.2.4"
   },
+  "main": "./url.js",
   "devDependencies": {
     "assert": "1.1.1",
     "mocha": "1.18.2",
