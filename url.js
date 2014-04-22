@@ -21,6 +21,7 @@
 
 var punycode = require('punycode');
 var objectKeys = Object.keys || require('object-keys');
+var indexOf = require('indexof');
 
 exports.parse = urlParse;
 exports.resolve = urlResolve;
@@ -154,7 +155,7 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
     // find the first instance of any hostEndingChars
     var hostEnd = -1;
     for (var i = 0; i < hostEndingChars.length; i++) {
-      var hec = rest.indexOf(hostEndingChars[i]);
+      var hec = indexOf(rest, hostEndingChars[i]);
       if (hec !== -1 && (hostEnd === -1 || hec < hostEnd))
         hostEnd = hec;
     }
@@ -182,7 +183,7 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
     // the host is the remaining to the left of the first non-host char
     hostEnd = -1;
     for (var i = 0; i < nonHostChars.length; i++) {
-      var hec = rest.indexOf(nonHostChars[i]);
+      var hec = indexOf(rest, nonHostChars[i]);
       if (hec !== -1 && (hostEnd === -1 || hec < hostEnd))
         hostEnd = hec;
     }
@@ -298,13 +299,13 @@ Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
 
 
   // chop off from the tail first.
-  var hash = rest.indexOf('#');
+  var hash = indexOf(rest, '#');
   if (hash !== -1) {
     // got a fragment string.
     this.hash = rest.substr(hash);
     rest = rest.slice(0, hash);
   }
-  var qm = rest.indexOf('?');
+  var qm = indexOf(rest, '?');
   if (qm !== -1) {
     this.search = rest.substr(qm);
     this.query = rest.substr(qm + 1);
@@ -363,7 +364,7 @@ Url.prototype.format = function() {
   if (this.host) {
     host = auth + this.host;
   } else if (this.hostname) {
-    host = auth + (this.hostname.indexOf(':') === -1 ?
+    host = auth + (indexOf(this.hostname, ':') === -1 ?
         this.hostname :
         '[' + this.hostname + ']');
     if (this.port) {
@@ -569,7 +570,7 @@ Url.prototype.resolveObject = function(relative) {
       //occationaly the auth can get stuck only in host
       //this especialy happens in cases like
       //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
-      var authInHost = result.host && result.host.indexOf('@') > 0 ?
+      var authInHost = result.host && indexOf(result.host, '@') > 0 ?
                        result.host.split('@') : false;
       if (authInHost) {
         result.auth = authInHost.shift();
@@ -651,7 +652,7 @@ Url.prototype.resolveObject = function(relative) {
     //occationaly the auth can get stuck only in host
     //this especialy happens in cases like
     //url.resolveObject('mailto:local1@domain1', 'local2@domain2')
-    var authInHost = result.host && result.host.indexOf('@') > 0 ?
+    var authInHost = result.host && indexOf(result.host, '@') > 0 ?
                      result.host.split('@') : false;
     if (authInHost) {
       result.auth = authInHost.shift();
