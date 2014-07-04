@@ -378,7 +378,7 @@ Url.prototype.format = function() {
 
   var search = this.search || (query && ('?' + query)) || '';
 
-  if (protocol && protocol.substr(-1) !== ':') protocol += ':';
+  if (protocol && protocol.length && protocol[protocol.length - 1] !== ':') protocol += ':';
 
   // only the slashedProtocols get the //.  Not mailto:, xmpp:, etc.
   // unless they had them to begin with.
@@ -632,8 +632,11 @@ Url.prototype.resolveObject = function(relative) {
     srcPath.unshift('');
   }
 
-  if (hasTrailingSlash && (srcPath.join('/').substr(-1) !== '/')) {
-    srcPath.push('');
+  if (hasTrailingSlash) { 
+    var srcPathJoined = srcPath.join('/');
+    if (srcPathJoined[srcPathJoined.length - 1] !== '/')) {
+      srcPath.push('');
+    }
   }
 
   var isAbsolute = srcPath[0] === '' ||
