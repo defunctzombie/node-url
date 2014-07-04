@@ -634,7 +634,7 @@ Url.prototype.resolveObject = function(relative) {
 
   if (hasTrailingSlash) { 
     var srcPathJoined = srcPath.join('/');
-    if (srcPathJoined[srcPathJoined.length - 1] !== '/')) {
+    if (srcPathJoined[srcPathJoined.length - 1] !== '/') {
       srcPath.push('');
     }
   }
