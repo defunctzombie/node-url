@@ -18,5 +18,11 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/defunctzombie/node-url.git"
-  }
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/defunctzombie/node-url/blob/master/LICENSE"
+    }
+  ]
 }
