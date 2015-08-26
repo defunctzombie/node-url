@@ -22,7 +22,7 @@
 'use strict';
 
 var punycode = require('punycode');
-var util = require('util');
+var util = require('./util');
 
 exports.parse = urlParse;
 exports.resolve = urlResolve;
