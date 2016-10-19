@@ -84,7 +84,7 @@ Take a parsed URL object, and return a formatted URL string.
 
 * `href` will be ignored.
 * `protocol` is treated the same with or without the trailing `:` (colon).
-  * The protocols `http`, `https`, `ftp`, `gopher`, `file` will be
+  * The protocols `http`, `https`, `ftp`, `gopher`, `file`, `ssh` and `mongodb` will be
     postfixed with `://` (colon-slash-slash).
   * All other protocols `mailto`, `xmpp`, `aim`, `sftp`, `foo`, etc will
     be postfixed with `:` (colon)
