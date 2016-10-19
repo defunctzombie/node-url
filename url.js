@@ -91,11 +91,15 @@ var protocolPattern = /^([a-z0-9.+-]+:)/i,
       'ftp': true,
       'gopher': true,
       'file': true,
+      'mongodb': true,
+      'ssh': true,
       'http:': true,
       'https:': true,
       'ftp:': true,
       'gopher:': true,
-      'file:': true
+      'file:': true,
+      'mongodb:': true,
+      'ssh:': true
     },
     querystring = require('querystring');
 
