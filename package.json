@@ -14,6 +14,7 @@
   "devDependencies": {
     "assert": "1.1.1",
     "mocha": "1.18.2",
+    "node-util": "0.0.1",
     "zuul": "3.3.0"
   },
   "scripts": {
