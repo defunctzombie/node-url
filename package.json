@@ -2,11 +2,17 @@
   "name": "url",
   "description": "The core `url` packaged standalone for use with Browserify.",
   "version": "0.11.0",
+  "author": "defunctzombie",
   "dependencies": {
     "punycode": "1.3.2",
     "querystring": "0.2.0"
   },
   "main": "./url.js",
+  "keywords": [
+    "parsing",
+    "url",
+    "analyze"
+  ],
   "devDependencies": {
     "@ljharb/eslint-config": "^17.5.0",
     "acorn": "^8.0.5",
