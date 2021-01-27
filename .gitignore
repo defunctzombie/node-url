@@ -1,4 +1,9 @@
+# gitignore
 node_modules
 .DS_Store
 npm-debug.log
-.jshintrc
+
+# Only apps should have lockfiles
+npm-shrinkwrap.json
+package-lock.json
+yarn.lock
