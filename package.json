@@ -7,10 +7,6 @@
     "querystring": "0.2.0"
   },
   "main": "./url.js",
-  "files": [
-    "url.js",
-    "util.js"
-  ],
   "devDependencies": {
     "@ljharb/eslint-config": "^17.5.0",
     "assert": "1.1.1",
