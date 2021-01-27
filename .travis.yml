@@ -1,6 +1,7 @@
 language: node_js
 node_js:
   - "0.10"
+script: "npm run zuul"
 env:
   global:
   - secure: OgPRLCzHFh5WbjHEKlghHFW1oOreSF2JVUr3CMaFDi03ngTS2WONSw8mRn8SA6FTldiGGBx1n8orDzUw6cdkB7+tkU3G5B0M0V3vl823NaUFKgxsCM3UGDYfJb3yfAG5cj72rVZoX/ABd1fVuG4vBIlDLxsSlKQFMzUCFoyttr8=

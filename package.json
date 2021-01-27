@@ -9,16 +9,20 @@
   "main": "./url.js",
   "devDependencies": {
     "@ljharb/eslint-config": "^17.5.0",
+    "acorn": "^8.0.5",
     "assert": "1.1.1",
     "eslint": "^7.18.0",
     "mocha": "^3.5.3",
+    "nyc": "^10.3.2",
     "zuul": "3.3.0"
   },
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run lint",
-    "tests-only": "mocha test.js",
-    "test": "npm run tests-only && zuul -- test.js",
+    "tests-only": "nyc mocha test.js",
+    "test": "npm run tests-only",
+    "posttest": "npm run test-local",
+    "zuul": "zuul -- test.js",
     "test-local": "zuul --local -- test.js"
   },
   "repository": {
