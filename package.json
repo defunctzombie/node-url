@@ -13,11 +13,12 @@
   ],
   "devDependencies": {
     "assert": "1.1.1",
-    "mocha": "1.18.2",
+    "mocha": "^3.5.3",
     "zuul": "3.3.0"
   },
   "scripts": {
-    "test": "mocha --ui qunit test.js && zuul -- test.js",
+    "tests-only": "mocha test.js",
+    "test": "npm run tests-only && zuul -- test.js",
     "test-local": "zuul --local -- test.js"
   },
   "repository": {
