@@ -20,7 +20,7 @@
     "eslint": "^7.18.0",
     "mocha": "^3.5.3",
     "nyc": "^10.3.2",
-    "zuul": "3.3.0"
+    "zuul": "^3.3.0"
   },
   "scripts": {
     "lint": "eslint .",
