@@ -22,8 +22,8 @@ jobs:
 
     strategy:
       matrix:
-        - node-version: ${{ fromJson(needs.matrix.outputs.stable) }}
-        - exclude:
+        node-version: ${{ fromJson(needs.matrix.outputs.stable) }}
+        exclude:
           - node-version: "0.8"
 
     steps:
@@ -44,7 +44,7 @@ jobs:
 
     strategy:
       matrix:
-        - node-version: ${{ fromJson(needs.matrix.outputs.unstable) }}
+        node-version: ${{ fromJson(needs.matrix.outputs.unstable) }}
 
     steps:
       - uses: actions/checkout@v2
