@@ -26,4 +26,13 @@
 		"no-script-url": 1,
 		"sort-keys": 0,
 	},
+
+	"overrides": [
+		{
+			"files": "test.js",
+			"rules": {
+				"no-sequences": 1,
+			},
+		},
+	],
 }
