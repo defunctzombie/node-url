@@ -762,6 +762,8 @@ Url.prototype.parseHost = function () {
       this.port = port.substr(1);
     }
     host = host.substr(0, host.length - port.length);
+  } else {
+    this.port = getPortFromProtocol(this.protocol);
   }
   if (host) { this.hostname = host; }
 };
