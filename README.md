@@ -106,3 +106,10 @@ an anchor tag.  Examples:
     url.resolve('/one/two/three', 'four')         // '/one/two/four'
     url.resolve('http://example.com/', '/one')    // 'http://example.com/one'
     url.resolve('http://example.com/one', '/two') // 'http://example.com/two'
+
+### url.fileURLToPath(url)
+
+Take a string or WHATWG `URL` object representing a filepath, and return the POSIX
+filepath as a string.
+
+    url.fileURLToPath('file:///etc/hosts')         // '/etc/hosts'
