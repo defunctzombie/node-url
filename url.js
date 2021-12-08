@@ -792,7 +792,7 @@ function getPathFromURLPosix(url) {
 
 function fileURLToPath(path) {
   if (typeof path === 'string') {
-    path = new URL(path);
+    path = urlParse(path);
   } else if (!isURLInstance(path)) {
     throw new TypeError('The "path" argument must be of type string or an instance of URL. Received ' + path);
   }
