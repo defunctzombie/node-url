@@ -26,7 +26,7 @@
 var test = require('mocha').test;
 var assert = require('assert');
 
-var url = require('./url');
+var url = require('../url');
 
 /*
  * URLs to parse, and expected data
