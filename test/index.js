@@ -2105,8 +2105,10 @@ fileURLToPathTestCases.forEach(function (fileURLToPathTestCase) {
   test('fileURLToPath(' + fileURLToPathTestCase.fileURL + ')', function () {
     var fromString = url.fileURLToPath(fileURLToPathTestCase.fileURL);
     assert.strictEqual(fromString, fileURLToPathTestCase.path);
-    var fromURL = url.fileURLToPath(new URL(fileURLToPathTestCase.fileURL));
-    assert.strictEqual(fromURL, fileURLToPathTestCase.path);
+    if (typeof URL === 'function') {
+      var fromURL = url.fileURLToPath(new URL(fileURLToPathTestCase.fileURL));
+      assert.strictEqual(fromURL, fileURLToPathTestCase.path);
+    }
   });
 });
 
