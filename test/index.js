@@ -2110,10 +2110,10 @@ fileURLToPathTestCases.forEach(function (fileURLToPathTestCase) {
   });
 });
 
-[
+[].concat(
   'https://host/y',
   'file://host/a',
-  new URL('https://host/y'),
+  typeof URL === 'function' ? new URL('https://host/y') : [],
   'file:///a%2F/',
   '',
   null,
@@ -2121,7 +2121,7 @@ fileURLToPathTestCases.forEach(function (fileURLToPathTestCase) {
   1,
   {},
   true
-].forEach(function (val) {
+).forEach(function (val) {
   test('fileURLToPath(' + val + ')', function () {
     assert['throws'](function () { url.fileURLToPath(val); }, TypeError);
   });
