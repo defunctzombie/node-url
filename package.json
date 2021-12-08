@@ -17,6 +17,7 @@
     "@ljharb/eslint-config": "^20.0.0",
     "acorn": "^8.6.0",
     "assert": "1.1.1",
+    "aud": "^1.1.5",
     "eslint": "^8.4.1",
     "mocha": "^3.5.3",
     "nyc": "^10.3.2",
@@ -27,7 +28,7 @@
     "pretest": "npm run lint",
     "tests-only": "nyc mocha",
     "test": "npm run tests-only",
-    "posttest": "npm run test-local",
+    "posttest": "aud --production",
     "zuul": "zuul -- test/index.js",
     "test-local": "zuul --local -- test/index.js"
   },
