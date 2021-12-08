@@ -24,7 +24,6 @@
 'use strict';
 
 var punycode = require('punycode');
-var util = require('./util');
 
 function Url() {
   this.protocol = null;
@@ -109,7 +108,7 @@ var protocolPattern = /^([a-z0-9.+-]+:)/i,
   querystring = require('querystring');
 
 function urlParse(url, parseQueryString, slashesDenoteHost) {
-  if (url && util.isObject(url) && url instanceof Url) { return url; }
+  if (url && typeof url === 'object' && url instanceof Url) { return url; }
 
   var u = new Url();
   u.parse(url, parseQueryString, slashesDenoteHost);
@@ -117,7 +116,7 @@ function urlParse(url, parseQueryString, slashesDenoteHost) {
 }
 
 Url.prototype.parse = function (url, parseQueryString, slashesDenoteHost) {
-  if (!util.isString(url)) {
+  if (typeof url !== 'string') {
     throw new TypeError("Parameter 'url' must be a string, not " + typeof url);
   }
 
@@ -406,7 +405,7 @@ function urlFormat(obj) {
    * this way, you can call url_format() on strings
    * to clean up potentially wonky urls.
    */
-  if (util.isString(obj)) { obj = urlParse(obj); }
+  if (typeof obj === 'string') { obj = urlParse(obj); }
   if (!(obj instanceof Url)) { return Url.prototype.format.call(obj); }
   return obj.format();
 }
@@ -434,7 +433,7 @@ Url.prototype.format = function () {
     }
   }
 
-  if (this.query && util.isObject(this.query) && Object.keys(this.query).length) {
+  if (this.query && typeof this.query === 'object' && Object.keys(this.query).length) {
     query = querystring.stringify(this.query);
   }
 
@@ -478,7 +477,7 @@ function urlResolveObject(source, relative) {
 }
 
 Url.prototype.resolveObject = function (relative) {
-  if (util.isString(relative)) {
+  if (typeof relative === 'string') {
     var rel = new Url();
     rel.parse(relative, false, true);
     relative = rel;
@@ -623,7 +622,7 @@ Url.prototype.resolveObject = function (relative) {
     srcPath = srcPath.concat(relPath);
     result.search = relative.search;
     result.query = relative.query;
-  } else if (!util.isNullOrUndefined(relative.search)) {
+  } else if (relative.search != null) {
     /*
      * just pull out the search.
      * like href='?foo'.
@@ -647,7 +646,7 @@ Url.prototype.resolveObject = function (relative) {
     result.search = relative.search;
     result.query = relative.query;
     // to support http.request
-    if (!util.isNull(result.pathname) || !util.isNull(result.search)) {
+    if (result.pathname !== null || result.search !== null) {
       result.path = (result.pathname ? result.pathname : '') + (result.search ? result.search : '');
     }
     result.href = result.format();
@@ -744,7 +743,7 @@ Url.prototype.resolveObject = function (relative) {
   }
 
   // to support request.http
-  if (!util.isNull(result.pathname) || !util.isNull(result.search)) {
+  if (result.pathname !== null || result.search !== null) {
     result.path = (result.pathname ? result.pathname : '') + (result.search ? result.search : '');
   }
   result.auth = relative.auth || result.auth;
