@@ -14,10 +14,10 @@
     "analyze"
   ],
   "devDependencies": {
-    "@ljharb/eslint-config": "^17.6.0",
-    "acorn": "^8.2.4",
+    "@ljharb/eslint-config": "^20.0.0",
+    "acorn": "^8.6.0",
     "assert": "1.1.1",
-    "eslint": "^7.26.0",
+    "eslint": "^8.4.1",
     "mocha": "^3.5.3",
     "nyc": "^10.3.2",
     "zuul": "^3.12.0"
