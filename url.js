@@ -104,8 +104,7 @@ var protocolPattern = /^([a-z0-9.+-]+:)/i,
     'ftp:': true,
     'gopher:': true,
     'file:': true
-  },
-  querystring = require('querystring');
+  };
 
 function urlParse(url, parseQueryString, slashesDenoteHost) {
   if (url && typeof url === 'object' && url instanceof Url) { return url; }
@@ -150,7 +149,7 @@ Url.prototype.parse = function (url, parseQueryString, slashesDenoteHost) {
       if (simplePath[2]) {
         this.search = simplePath[2];
         if (parseQueryString) {
-          this.query = querystring.parse(this.search.substr(1));
+          this.query = Object.fromEntries(new URLSearchParams(this.search.substr(1)));
         } else {
           this.query = this.search.substr(1);
         }
@@ -372,7 +371,7 @@ Url.prototype.parse = function (url, parseQueryString, slashesDenoteHost) {
     this.search = rest.substr(qm);
     this.query = rest.substr(qm + 1);
     if (parseQueryString) {
-      this.query = querystring.parse(this.query);
+      this.query = Object.fromEntries(new URLSearchParams(this.query));
     }
     rest = rest.slice(0, qm);
   } else if (parseQueryString) {
@@ -434,7 +433,7 @@ Url.prototype.format = function () {
   }
 
   if (this.query && typeof this.query === 'object' && Object.keys(this.query).length) {
-    query = querystring.stringify(this.query);
+    query = new URLSearchParams(this.query).toString();
   }
 
   var search = this.search || (query && ('?' + query)) || '';
