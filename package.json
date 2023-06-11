@@ -14,7 +14,7 @@
     "analyze"
   ],
   "devDependencies": {
-    "@ljharb/eslint-config": "^21.0.1",
+    "@ljharb/eslint-config": "^21.1.0",
     "acorn": "^8.8.2",
     "aud": "^2.0.2",
     "eslint": "=8.8.0",
