@@ -434,7 +434,11 @@ Url.prototype.format = function () {
   }
 
   if (this.query && typeof this.query === 'object' && Object.keys(this.query).length) {
-    query = querystring.stringify(this.query);
+    query = querystring.stringify(this.query, {
+      arrayFormat: 'repeat',
+      encodeValuesOnly: true,
+      addQueryPrefix: false
+    });
   }
 
   var search = this.search || (query && ('?' + query)) || '';

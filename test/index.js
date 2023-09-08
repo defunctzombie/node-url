@@ -25,6 +25,7 @@
 
 var test = require('mocha').test;
 var assert = require('assert');
+var nodeURL = require('url');
 
 var url = require('../url');
 
@@ -2025,6 +2026,15 @@ relativeTests.forEach(function (relativeTest) {
 
     assert.equal(actual, expected, 'format(' + actual + ') == ' + expected + '\nactual:' + actual);
   });
+});
+
+test('format with querystring', function () {
+  var obj = { protocol: 'https:', host: 'google.com', pathname: 'test', query: { message: ['value1', 'value2'] } };
+
+  var actual = url.format(obj);
+  var expected = nodeURL.format(obj);
+
+  assert.equal(actual, expected, 'format(' + actual + ') == ' + expected + '\nactual:' + actual);
 });
 
 /*
