@@ -1164,6 +1164,19 @@ var formatTests = {
     hash: '#frag',
     search: '?abc=the#1?&foo=bar',
     pathname: '/fooA100%mBr'
+  },
+
+  // colons in keys
+  'https://cdpn.io/test?custom%3Aid=12': {
+    href: 'https://cdpn.io/test?custom%3Aid=12',
+    protocol: 'https:',
+    hostname: 'cdpn.io',
+    hash: '',
+    search: '?custom%3Aid=12',
+    pathname: '/test',
+    query: {
+      'custom:id': '12'
+    }
   }
 };
 
@@ -2029,7 +2042,7 @@ relativeTests.forEach(function (relativeTest) {
 });
 
 test('format with querystring', function () {
-  var obj = { protocol: 'https:', host: 'google.com', pathname: 'test', query: { message: ['value1', 'value2'] } };
+  var obj = { protocol: 'https:', host: 'google.com', pathname: 'test', query: { message: ['value1', 'value2'], 'custom:id': 12 } };
 
   var actual = url.format(obj);
   var expected = nodeURL.format(obj);
