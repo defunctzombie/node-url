@@ -171,7 +171,7 @@ Url.prototype.parse = function (url, parseQueryString, slashesDenoteHost) {
   }
 
   /*
-   * figure out if it's got a host
+   * figure out if its got a host
    * user@server is *always* interpreted as a hostname, and url
    * resolution will treat //foo/bar as host=foo,path=bar because that's
    * how the browser resolves relative URLs.
