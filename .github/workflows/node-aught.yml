@@ -10,10 +10,3 @@ jobs:
       type: minors
       command: npm run tests-only
       skip-ls-check: true # node 4-9 fails this
-
-  node:
-    name: 'node < 10'
-    needs: [tests]
-    runs-on: ubuntu-latest
-    steps:
-      - run: 'echo tests completed'
