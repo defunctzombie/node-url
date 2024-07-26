@@ -35,5 +35,8 @@
     "type": "git",
     "url": "https://github.com/defunctzombie/node-url.git"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": ">= 0.4"
+  }
 }
