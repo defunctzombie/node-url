@@ -23,7 +23,7 @@
 
 'use strict';
 
-var punycode = require('punycode');
+var punycode = require('punycode/');
 
 function Url() {
   this.protocol = null;
