@@ -4,7 +4,7 @@
   "version": "0.11.4",
   "author": "defunctzombie",
   "dependencies": {
-    "punycode": "^1.4.1",
+    "punycode": "^2.3.1",
     "qs": "^6.12.3"
   },
   "main": "./url.js",
